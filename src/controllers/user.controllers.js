@@ -36,34 +36,32 @@ const registerUser = asyncHandler( async (req, res) => {
         throw new ApiError(409, "User with email or username already exists")
     }
    
-    const avatarLocalPath = req.file?.path; // For Multer
+    // const avatarLocalPath = req.file?.path; // For Multer
 
     // const avatarLocalPath = req.file?.avatar?.path;
     // const avatarLocalPath = req.files?.avatar[0]?.path;
 
     
-    console.log("this is avatar path : ",avatarLocalPath);
-    if (!avatarLocalPath) {
-        throw new ApiError(400, "Avatar file is required")
-    }
+    // console.log("this is avatar path : ",avatarLocalPath);
+    // if (!avatarLocalPath) {
+    //     throw new ApiError(400, "Avatar file is required")
+    // }
 
     // const avatarLocalPath = req.file.path;
     // const avatarLocalPath = req.files.avatar.tempFilePath;
 
-        if (!avatarLocalPath) {
-            throw new ApiError(400, "Avatar file is required");
-        }
-        // console.log("Is this printing ",avatarLocalPath);
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
+    //     if (!avatarLocalPath) {
+    //         throw new ApiError(400, "Avatar file is required");
+    //     }
+    //     // console.log("Is this printing ",avatarLocalPath);
+    // const avatar = await uploadOnCloudinary(avatarLocalPath)
 
-    if (!avatar) {
-        throw new ApiError(400, "Avatar file is required")
-    }
+    // if (!avatar) {
+    //     throw new ApiError(400, "Avatar file is required")
+    // }
    
 
     const user = await User.create({
-        avatar: avatar.url,
-        coverImage: coverImage?.url || "",
         email, 
         password,
         username: username.toLowerCase()
